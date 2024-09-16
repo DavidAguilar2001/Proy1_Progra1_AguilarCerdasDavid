@@ -1,4 +1,6 @@
 #include <iostream>
+#include <time.h>
+
 using namespace std;
 
 class CinemaFuncion {
@@ -54,6 +56,8 @@ public:
 		review = review1;
 	}
 
+	~CinemaFuncion(){}
+
 	void setYear(int y) {
 		year = y;
 	}
@@ -102,8 +106,65 @@ public:
 		review = y;
 	}
 
+	int getYear() {
+		return year;
+	}
+
+	int getDuration() {
+		return duration;
+	}
+
+	int getPrice() {
+		return price;
+	}
+
+	int getRoomNumber() {
+		return roomNumber;
+	}
+
+	int getStarTime() {
+		return starTime;
+	}
+
+	int getEndTime() {
+		return endTime;
+	}
+
+	int getDateDay() {
+		return dateDay;
+	}
+
+	int getDateMonth() {
+		return dateMonth;
+	}
+
+	int getDateYear() {
+		return dateYear;
+	}
+
+	string getName() {
+		return name;
+	}
+
+	string getCountry() {
+		return country;
+	}
+
+	string getReview() {
+		return review;
+	}
+
 	string getmovieName() {
 		return name;
+	}
+
+	void dateFuncion() {
+		if (dateDay <= 9)
+			cout << "0";
+		cout << dateDay << "/";
+		if (dateMonth <= 9)
+			cout << "0";
+		cout << dateMonth << "/" << dateYear << "A las " << starTime << endl;
 	}
 
 	char occupiedSeats(int seat){
@@ -141,6 +202,29 @@ public:
 
 
 	}
+};
+
+class Reservation {
+private:
+	int numberTicket = 0;
+	int seats[112];
+
+public:
+	Reservation(){}
+	Reservation(int nt){
+		numberTicket = nt;
+	}
+	~Reservation(){}
+	void setNumberTicket(int n) {
+		numberTicket = n;
+	}
+	int getNumberTicket() {
+		return numberTicket;
+	}
+	void seatsReservation(int numberSeats) {
+
+	}
+
 };
 
 void menu(){
@@ -393,9 +477,43 @@ int main(){
 			}
 		}
 			break;
-		case 6:
+		case 6:{
+			int reservationOption = 0, seats = 0;
+
+			cout << "Estas en la seccion de reserva " << endl << "En que pelicula quieres reservar?" << endl;
+			cout << "Opcion 1: " << endl;
+			cout << movie1.getName() << endl;
+			movie1.dateFuncion();
+			cout << "El numero de sala: " << movie1.getRoomNumber() << endl << endl;
+
+			cout << "Opcion 2: " << endl;
+			cout << movie2.getName() << endl;
+			movie2.dateFuncion();
+			cout << "El numero de sala: " << movie2.getRoomNumber() << endl << endl;
+
+			cout << "Opcion 3: " << endl;
+			cout << movie3.getName() << endl;
+			movie3.dateFuncion();
+			cout << "El numero de sala: " << movie3.getRoomNumber() << endl << endl;
+			cin >> reservationOption;
+
+			if (reservationOption == 1) {
+				cout << "Estos las butacas disponibles" << endl;
+				movie1.movieTheater();
+				cout << endl << "Cuantas butacas ocupas? " << endl;
+				cin >> seats;
+
+			}
+			else if (reservationOption == 2) {
+
+			}
+			else if (reservationOption == 3) {
+
+			}
+
+			}
 			break;
-		case 7:
+		case 7:{}
 			break;
 		}
 	} while (end==0);
