@@ -106,6 +106,10 @@ public:
 		review = y;
 	}
 
+	void setSeats(int y, int n) {
+		seats[y] = n;
+	}
+
 	int getYear() {
 		return year;
 	}
@@ -142,6 +146,10 @@ public:
 		return dateYear;
 	}
 
+	int getSeats(int n) {
+		return seats[n - 1];
+	}
+
 	string getName() {
 		return name;
 	}
@@ -165,6 +173,14 @@ public:
 		if (dateMonth <= 9)
 			cout << "0";
 		cout << dateMonth << "/" << dateYear << "A las " << starTime << endl;
+	}
+
+	void reservationSeat(int n) {
+		seats[n - 1] = 1;
+	}
+
+	void buySeat(int n) {
+		seats[n - 1] = 2;
 	}
 
 	char occupiedSeats(int seat){
@@ -208,21 +224,51 @@ class Reservation {
 private:
 	int numberTicket = 0;
 	int seats[112];
+	int totalPrice = 0;
 
 public:
-	Reservation(){}
+	Reservation(){
+		for (int i = 0; i < 112; i++) {
+			seats[i] = 0;
+		}
+	}
 	Reservation(int nt){
 		numberTicket = nt;
+		for (int i = 0; i < 112; i++) {
+			seats[i] = 0;
+		}
 	}
 	~Reservation(){}
 	void setNumberTicket(int n) {
 		numberTicket = n;
 	}
+	void setTotalPrice(int n) {
+		totalPrice = n;
+	}
 	int getNumberTicket() {
 		return numberTicket;
 	}
-	void seatsReservation(int numberSeats) {
-
+	int getTotalPrice() {
+		return totalPrice;
+	}
+	void getSeats() {
+		for (int i = 0; i < 112; i++) {
+			if (seats[i] > 0) {
+				cout << seats[i] << "  ";
+			}
+		}
+	}
+	void seatsReservation(int numberSeats, int butacas[112], int price) {
+		butacas = seats;
+		totalPrice = numberSeats * price;
+		cout << "Su numero de consecutivo es: " << numberTicket << endl;
+		cout << "Las butacas reservadas son: ";
+		for (int i = 0; i < 112; i++) {
+			if (butacas[i] > 0) {
+				cout << butacas[i] << "  " << endl;
+			}
+		}
+		cout << "El monto total a pagar es de: " << totalPrice << " colones" << endl;
 	}
 
 };
@@ -246,38 +292,14 @@ void menu(){
 
 void about() {
 	int next;
-	cout << "Programa desarrollado por" << endl << endl << "	David Aguilar Cerdas" << endl << endl;
+	cout << "Programa desarrollado por" << endl << endl;
+	cout << "	David Aguilar Cerdas" << endl;
+	cout << "        Programacion 1" << endl;
+	cout << "        Grupo: 80" << endl;
+	cout << "        2024" << endl << endl;
 	cout << "Digite cualquier numero para continuar" << endl << endl;
 	cin >> next;
 	cout << endl << endl;
-}
-
-void sala() {
-	char available = 36, busy = 157, reserved = 207, e1 = 218, e2 = 191, e3 = 192, e4 = 217, v = 179, h = 196, t = 194, x = 197, hDer = 195, hIz = 180, tr = 193, p = 178;
-
-	cout << "Disponible: " << available << "  Reservado: " << reserved << "  Ocupado: " << busy << endl;
-
-	cout << e1 << h << h << h << h << t << h << h << h << h << t << h << h << h << h << t << h << h << h << h << t << h << h << h << h << t << h << h << h << h << t << h << h << h << h << t << h << h << h << h << t << h << h << h << h << t << h << h << h << h << t << h << h << h << t << h << h << h << h << t << h << h << h << h << t << h << h << h << h << t << h << h << h << h << e2 << endl;
-	cout << v << 112 << available << v << 111 << available << v << 110 << available << v << 109 << available << v << 108 << available << v << 107 << available << v << 106 << available << v << 105 << available << v << 104 << available << v << 103 << available << v << p << p << p << v << 102 << available << v << 101 << available << v << 100 << available << v << " " << 99 << available << v << endl;
-	cout << hDer << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << hIz << endl;
-	cout << v << " " << 98 << available << v << " " << 97 << available << v << " " << 96 << available << v << " " << 95 << available << v << " " << 94 << available << v << " " << 93 << available << v << " " << 92 << available << v << " " << 91 << available << v << " " << 90 << available << v << " " << 89 << available << v << p << p << p << v << " " << 88 << available << v << " " << 87 << available << v << " " << 86 << available << v << " " << 85 << available << v << endl;
-	cout << hDer << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << hIz << endl;
-	cout << v << " " << 84 << available << v << " " << 83 << available << v << " " << 82 << available << v << " " << 81 << available << v << " " << 80 << available << v << " " << 79 << available << v << " " << 78 << available << v << " " << 77 << available << v << " " << 76 << available << v << " " << 75 << available << v << p << p << p << v << " " << 74 << available << v << " " << 73 << available << v << " " << 72 << available << v << " " << 71 << available << v << endl;
-	cout << hDer << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << hIz << endl;
-	cout << v << " " << 70 << available << v << " " << 69 << available << v << " " << 68 << available << v << " " << 67 << available << v << " " << 66 << available << v << " " << 65 << available << v << " " << 64 << available << v << " " << 63 << available << v << " " << 62 << available << v << " " << 61 << available << v << p << p << p << v << " " << 60 << available << v << " " << 59 << available << v << " " << 58 << available << v << " " << 57 << available << v << endl;
-	cout << hDer << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << hIz << endl;
-	cout << v << " " << 56 << available << v << " " << 55 << available << v << " " << 54 << available << v << " " << 53 << available << v << " " << 52 << available << v << " " << 51 << available << v << " " << 50 << available << v << " " << 49 << available << v << " " << 48 << available << v << " " << 47 << available << v << p << p << p << v << " " << 46 << available << v << " " << 45 << available << v << " " << 44 << available << v << " " << 43 << available << v << endl;
-	cout << hDer << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << hIz << endl;
-	cout << v << " " << 42 << available << v << " " << 41 << available << v << " " << 40 << available << v << " " << 39 << available << v << " " << 38 << available << v << " " << 37 << available << v << " " << 36 << available << v << " " << 35 << available << v << " " << 34 << available << v << " " << 33 << available << v << p << p << p << v << " " << 32 << available << v << " " << 31 << available << v << " " << 30 << available << v << " " << 30 << available << v << endl;
-	cout << hDer << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << hIz << endl;
-	cout << v << " " << 28 << available << v << " " << 27 << available << v << " " << 26 << available << v << " " << 25 << available << v << " " << 24 << available << v << " " << 23 << available << v << " " << 22 << available << v << " " << 21 << available << v << " " << 20 << available << v << " " << 19 << available << v << p << p << p << v << " " << 18 << available << v << " " << 17 << available << v << " " << 16 << available << v << " " << 15 << available << v << endl;
-	cout << hDer << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << x << h << h << h << h << hIz << endl;
-	cout << v << " " << 14 << available << v << " " << 13 << available << v << " " << 12 << available << v << " " << 11 << available << v << " " << 10 << available << v << " " << " " << 9 << available << v << " " << " " << 8 << available << v << " " << " " << 7 << available << v << " " << " " << 6 << available << v << " " << " " << 5 << available << v << p << p << p << v << " " << " " << 4 << available << v << " " << " " << 3 << available << v << " " << " " << 2 << available << v << " " << " " << 1 << available << v << endl;
-	cout << e3 << h << h << h << h << tr << h << h << h << h << tr << h << h << h << h << tr << h << h << h << h << tr << h << h << h << h << tr << h << h << h << h << tr << h << h << h << h << tr << h << h << h << h << tr << h << h << h << h << tr << h << h << h << h << tr << h << h << h << tr << h << h << h << h << tr << h << h << h << h << tr << h << h << h << tr << h << h << h << h << h << e4 << endl;
-
-
-
-
 }
 
 int main(){
@@ -287,6 +309,9 @@ int main(){
 	CinemaFuncion movie1;
 	CinemaFuncion movie2;
 	CinemaFuncion movie3;
+	Reservation reservationCinema1;
+	Reservation reservationCinema2;
+	Reservation reservationCinema3;
 
     cout << "Bienvenido a NUEVA CINEMA SA" << endl << endl;
 
@@ -305,9 +330,9 @@ int main(){
 			break;
 		case 3: {
 			cout << "Que pelicula quieres modifical?" << endl;
-			cout << "Pelicula 1: " << movie1.getmovieName();
-			cout << "Pelicula 2: " << movie2.getmovieName();
-			cout << "Pelicula 3: " << movie3.getmovieName();
+			cout << "Pelicula 1: " << movie1.getmovieName() << endl;
+			cout << "Pelicula 2: " << movie2.getmovieName() << endl;
+			cout << "Pelicula 3: " << movie3.getmovieName() << endl;
 			cin >> optionMovie;
 
 			if (optionMovie == 1) {
@@ -323,7 +348,7 @@ int main(){
 				cin >> optionModifier;
 				movie1.setYear(optionModifier);
 
-				cout << "Escribe la duracion: " << endl;
+				cout << "Escribe la duracion en minutos: " << endl;
 				cin >> optionModifier;
 				movie1.setDuration(optionModifier);
 
@@ -344,7 +369,7 @@ int main(){
 				cin >> optionModifier;
 				movie2.setYear(optionModifier);
 
-				cout << "Escribe la duracion: " << endl;
+				cout << "Escribe la duracion en minutos: " << endl;
 				cin >> optionModifier;
 				movie2.setDuration(optionModifier);
 
@@ -365,7 +390,7 @@ int main(){
 				cin >> optionModifier;
 				movie3.setYear(optionModifier);
 
-				cout << "Escribe la duracion: " << endl;
+				cout << "Escribe la duracion en minutos: " << endl;
 				cin >> optionModifier;
 				movie3.setDuration(optionModifier);
 
@@ -377,9 +402,9 @@ int main(){
 			break;
 		case 4: {
 			cout << "Que pelicula quieres modifical?" << endl;
-			cout << "Pelicula 1: " << movie1.getmovieName();
-			cout << "Pelicula 2: " << movie2.getmovieName();
-			cout << "Pelicula 3: " << movie3.getmovieName();
+			cout << "Pelicula 1: " << movie1.getmovieName() << endl;
+			cout << "Pelicula 2: " << movie2.getmovieName() << endl;
+			cout << "Pelicula 3: " << movie3.getmovieName() << endl;
 			cin >> optionMovie;
 
 			if (optionMovie == 1) {
@@ -413,9 +438,9 @@ int main(){
 			break;
 		case 5: {
 			cout << "Que pelicula quieres modifical?" << endl;
-			cout << "Pelicula 1: " << movie1.getmovieName();
-			cout << "Pelicula 2: " << movie2.getmovieName();
-			cout << "Pelicula 3: " << movie3.getmovieName();
+			cout << "Pelicula 1: " << movie1.getmovieName() << endl;
+			cout << "Pelicula 2: " << movie2.getmovieName() << endl;
+			cout << "Pelicula 3: " << movie3.getmovieName() << endl;
 			cin >> optionMovie;
 
 			if (optionMovie == 1) {
@@ -427,6 +452,7 @@ int main(){
 				cin >> optionModifier;
 				movie1.setDateMonth(optionModifier);
 				cout << "Dia" << endl;
+				cin >> optionModifier;
 				movie1.setDateDay(optionModifier);
 
 				cout << "Escribe el la hora de inicio: " << endl;
@@ -446,6 +472,7 @@ int main(){
 				cin >> optionModifier;
 				movie2.setDateMonth(optionModifier);
 				cout << "Dia" << endl;
+				cin >> optionModifier;
 				movie2.setDateDay(optionModifier);
 
 				cout << "Escribe el la hora de inicio: " << endl;
@@ -465,6 +492,7 @@ int main(){
 				cin >> optionModifier;
 				movie3.setDateMonth(optionModifier);
 				cout << "Dia" << endl;
+				cin >> optionModifier;
 				movie3.setDateDay(optionModifier);
 
 				cout << "Escribe el la hora de inicio: " << endl;
@@ -478,7 +506,7 @@ int main(){
 		}
 			break;
 		case 6:{
-			int reservationOption = 0, seats = 0;
+			int reservationOption = 0, seats = 0, butacas[112], numberSeat = 0;
 
 			cout << "Estas en la seccion de reserva " << endl << "En que pelicula quieres reservar?" << endl;
 			cout << "Opcion 1: " << endl;
@@ -502,18 +530,144 @@ int main(){
 				movie1.movieTheater();
 				cout << endl << "Cuantas butacas ocupas? " << endl;
 				cin >> seats;
-
+				for (int i = 0; i < seats; i++) {
+					cout << "Que numero de butaca ocupas?" << endl;
+					cin >> numberSeat;
+					butacas[i] = numberSeat;
+					if (movie1.getSeats(numberSeat) == 1) {
+						cout << "Este haciento ya esta reservado, elige otro" << endl;
+					}
+					else if (movie1.getSeats(numberSeat) == 2) {
+						cout << "Este haciento ya esta comprado, elige otro" << endl;
+					}
+					else
+						movie1.reservationSeat(numberSeat);
+				}
+				reservationCinema1.setNumberTicket(time(0));
+				reservationCinema1.seatsReservation(seats, butacas, movie1.getPrice());
+				cout << "Reservacion finalizada, ve a la opcion de ventas para finalizar la compra" << endl;
 			}
 			else if (reservationOption == 2) {
-
+				cout << "Estos las butacas disponibles" << endl;
+				movie2.movieTheater();
+				cout << endl << "Cuantas butacas ocupas? " << endl;
+				cin >> seats;
+				for (int i = 0; i < seats; i++) {
+					cout << "Que numero de butaca ocupas?" << endl;
+					cin >> numberSeat;
+					butacas[i] = numberSeat;
+					if (movie2.getSeats(numberSeat) == 1) {
+						cout << "Este haciento ya esta reservado, elige otro" << endl;
+					}
+					else if (movie2.getSeats(numberSeat) == 2) {
+						cout << "Este haciento ya esta comprado, elige otro" << endl;
+					}
+					else
+						movie2.reservationSeat(numberSeat);
+				}
+				reservationCinema2.setNumberTicket(time(0));
+				reservationCinema2.seatsReservation(seats, butacas, movie2.getPrice());
+				cout << "Reservacion finalizada, ve a la opcion de ventas para finalizar la compra" << endl;
 			}
 			else if (reservationOption == 3) {
-
+				cout << "Estos las butacas disponibles" << endl;
+				movie3.movieTheater();
+				cout << endl << "Cuantas butacas ocupas? " << endl;
+				cin >> seats;
+				for (int i = 0; i < seats; i++) {
+					cout << "Que numero de butaca ocupas?" << endl;
+					cin >> numberSeat;
+					butacas[i] = numberSeat;
+					if (movie3.getSeats(numberSeat) == 1) {
+						cout << "Este haciento ya esta reservado, elige otro" << endl;
+					}
+					else if (movie3.getSeats(numberSeat) == 2) {
+						cout << "Este haciento ya esta comprado, elige otro" << endl;
+					}
+					else
+						movie3.reservationSeat(numberSeat);
+				}
+				reservationCinema3.setNumberTicket(time(0));
+				reservationCinema3.seatsReservation(seats, butacas, movie3.getPrice());
+				cout << "Reservacion finalizada, ve a la opcion de ventas para finalizar la compra" << endl;
 			}
-
 			}
 			break;
-		case 7:{}
+		case 7:{
+			int consecuitivo = 0, id = 0, cardNumber = 0;
+			cout << "Esta es la seccion de ventas, digite su numero de consecutivo" << endl;
+			cin >> consecuitivo;
+			if (consecuitivo == reservationCinema1.getNumberTicket()) {
+				cout << "Pelicula: " << movie1.getName() << endl;
+				cout << "Precio a pagar: " << reservationCinema1.getTotalPrice() << " colones" << endl;
+				cout << "Digite su cedula para proceder con el pago" << endl;
+				cin >> id;
+				cout << "Digite el numero de su tarjeta para proceder con el pago, tienen que ser 8 numeros" << endl;
+				cin >> cardNumber;
+				for (int i = 0; i < 112; i++) {
+					if (movie1.getSeats(i) == 1) {
+						movie1.setSeats(i, 2);
+					}
+				}
+				cout << endl << "Factura" << endl << endl;
+				cout << "Pelicula: " << movie1.getName() << endl;
+				movie1.dateFuncion();
+				cout << endl << movie1.getRoomNumber() << endl;
+				cout << movie1.getReview() << endl;
+				cout << "Asientos: ";
+				reservationCinema1.getSeats();
+				cout << "Cliente: " << id << endl << endl;
+				cout << "****Gracias por su visita a NUEVA CINEMA SA****" << endl << endl;
+
+			}
+			else if (consecuitivo == reservationCinema2.getNumberTicket()) {
+				cout << "Pelicula: " << movie2.getName() << endl;
+				cout << "Precio a pagar: " << reservationCinema2.getTotalPrice() << " colones" << endl;
+				cout << "Digite su cedula para proceder con el pago" << endl;
+				cin >> id;
+				cout << "Digite el numero de su tarjeta para proceder con el pago, tienen que ser 8 numeros" << endl;
+				cin >> cardNumber;
+				for (int i = 0; i < 112; i++) {
+					if (movie2.getSeats(i) == 1) {
+						movie2.setSeats(i, 2);
+					}
+				}
+				cout << endl << "Factura" << endl << endl;
+				cout << "Pelicula: " << movie2.getName() << endl;
+				movie2.dateFuncion();
+				cout << endl << movie2.getRoomNumber() << endl;
+				cout << movie2.getReview() << endl;
+				cout << "Asientos: ";
+				reservationCinema2.getSeats();
+				cout << "Cliente: " << id << endl << endl;
+				cout << "****Gracias por su visita a NUEVA CINEMA SA****" << endl << endl;
+			}
+			else if (consecuitivo == reservationCinema3.getNumberTicket()) {
+				cout << "Pelicula: " << movie3.getName() << endl;
+				cout << "Precio a pagar: " << reservationCinema3.getTotalPrice() << " colones" << endl;
+				cout << "Digite su cedula para proceder con el pago" << endl;
+				cin >> id;
+				cout << "Digite el numero de su tarjeta para proceder con el pago, tienen que ser 8 numeros" << endl;
+				cin >> cardNumber;
+				for (int i = 0; i < 112; i++) {
+					if (movie3.getSeats(i) == 1) {
+						movie3.setSeats(i, 2);
+					}
+				}
+				cout << endl << "Factura" << endl << endl;
+				cout << "Pelicula: " << movie3.getName() << endl;
+				movie3.dateFuncion();
+				cout << endl << movie3.getRoomNumber() << endl;
+				cout << movie3.getReview() << endl;
+				cout << "Asientos: ";
+				reservationCinema3.getSeats();
+				cout << "Cliente: " << id << endl << endl;
+				cout << "****Gracias por su visita a NUEVA CINEMA SA****" << endl << endl;
+			}
+			else {
+				cout << "Numero de consecuitivo invalido" << endl << endl;
+			}		
+			}
 			break;
 		}
 	} while (end==0);
